@@ -1,0 +1,74 @@
+{
+  "package.json": {
+    "name": "task-garden-app",
+    "version": "1.0.0",
+    "description": "A collaborative task management app with garden metaphors",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js",
+      "dev": "concurrently \"npm run server\" \"npm run client\"",
+      "server": "nodemon server.js",
+      "client": "cd client && npm start",
+      "build": "cd client && npm run build",
+      "heroku-postbuild": "cd client && npm install && npm run build"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "cors": "^2.8.5",
+      "dotenv": "^16.3.1",
+      "@google/generative-ai": "^0.2.1"
+    },
+    "devDependencies": {
+      "nodemon": "^3.0.1",
+      "concurrently": "^8.2.0"
+    },
+    "engines": {
+      "node": ">=14.0.0",
+      "npm": ">=6.0.0"
+    }
+  },
+  
+  "Procfile": "web: node server.js",
+  
+  ".env.example": {
+    "PORT": "5000",
+    "NODE_ENV": "production",
+    "GEMINI_API_KEY": "your_gemini_api_key_here"
+  },
+  
+  "client/package.json": {
+    "name": "task-garden-client",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-scripts": "5.0.1"
+    },
+    "scripts": {
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+      "extends": [
+        "react-app",
+        "react-app/jest"
+      ]
+    },
+    "browserslist": {
+      "production": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+      ],
+      "development": [
+        "last 1 chrome version",
+        "last 1 firefox version",
+        "last 1 safari version"
+      ]
+    },
+    "proxy": "http://localhost:5000"
+  }
+}
